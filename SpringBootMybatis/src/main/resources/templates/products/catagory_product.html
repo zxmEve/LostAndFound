@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<style type="text/css">
+.nav-group {
+	border: 1px solid #e8e8e8;
+	min-height: 50px;
+}
+
+.nav-item {
+	position: relative;
+	border-top: 1px dashed #dedede;
+	margin: 0 8px;
+}
+
+.nav-item:first-child {
+	border-top: none;
+}
+
+.item-header {
+	font-family: 微软雅黑;
+	position: absolute;
+	left: 11px;
+	top: 9px;
+	color: #999;
+}
+
+.item-header h4 {
+	font-weight: 100;
+	font-size: 14px;
+	margin-top: 1px;
+}
+.item-body{
+	padding: 0 0px 0 112px;
+}
+.item-inner a{
+	float:left;
+	margin: 9px 40px 9px 0;
+	height:18px;
+	color:#000;
+	text-decoration:none;
+}
+</style>
+<title>产品分类</title>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand">求索人</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">首页</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="#">校园服务</a></li>
+					<li class="divider-vertical"></li>
+					<li><a href="/toProducts">校园商城</a></li>
+				</ul>
+			</div>
+			<div class="navbar-right" style="margin-right: 10px">
+				<form action="/getAllUsers" method="get"
+					class="navbar-form navbar-left">
+					<input type="text" class="form-control" placeholder="输入关键词...">
+					<button type="submit">搜索</button>
+				</form>
+				<ul class="nav navbar-nav primary" th:if="${loginUser}==null">
+					<li><a href="#">注册</a></li>
+					<li><a href="/toLogin">登录</a></li>
+				</ul>
+				<ul class="nav navbar-nav primary" th:if="${loginUser}!=null">
+					<li><a href="#"><span th:text="登录用户："></span></a></li>
+					<li><a href="#"><span th:text="${loginUser}"></span></a></li>
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<ul class="breadcrumb">
+				<li><a href="#">首页</a></li>
+				<li class="active">手机分类</li>
+			</ul>
+			<div class="nav-group">
+				<div class="nav-item clearfix">
+					<div class="item-header">
+						<h4>品牌：</h4>
+					</div>
+					<div class="item-body">
+						<div class="item-inner">
+							<a href="#"><span>Apple/苹果</span></a>
+							<a href="#"><span>Xiaomi/小米</span></a>
+							<a href="#"><span>华为</span></a>
+							<a href="#"><span>honor/荣耀</span></a>
+							<a href="#"><span>Oppo</span></a>
+							<a href="#" class="pull-right"><span>更多...</span></a>
+						</div>
+					</div>
+				</div>
+				<div class="nav-item clearfix">
+					<div class="item-header">
+						<h4>类型：</h4>
+					</div>
+					<div class="item-body">
+						<div class="item-inner">
+							<a href="#"><span>拍照手机</span></a>
+							<a href="#"><span>智能手机</span></a>
+							<a href="#"><span>4G手机</span></a>
+							<a href="#"><span>时尚手机</span></a>
+							<a href="#" class="pull-right"><span>更多...</span></a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

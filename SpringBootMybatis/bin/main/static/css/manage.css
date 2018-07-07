@@ -1,0 +1,68 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    font-family: "Microsoft YaHei", sans-serif;
+ }
+ .pageSidebar{
+    width: 230px;
+    height:100%;
+    padding-bottom: 30px;
+    overflow: auto;
+    background-color: #e3e3e3;
+    font-size: 15px;
+    
+ }
+ .pageSidebar li{
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    cursor: pointer;
+ }
+ .pageSidebar li:hover{
+    /*background-color: #199475;*/
+    background-color: #4e8858;
+    color: #fff;
+ }
+ .active{
+    /*background-color: #044d22;*/
+     background-color: #436a3e;
+    color: #fff;
+ }
+ .pageSidebar li span{
+    padding-right: 8px;
+ }
+ .split {
+     width: 5px;
+     height: 100%;
+     bottom: 0;
+     left: 240px;
+     position: absolute;
+     overflow: hidden;
+     background-color: #fff;
+ }
+ .pageContent{
+     height: 100%;
+     min-width: 768px;
+     left: 246px;
+     top: 0;
+     right: 0;
+     z-index: 3;
+     padding-bottom: 30px;
+     position: absolute;
+ }
+ .pageContainer{
+     bottom: 0;
+     left:0;
+     right: 0;
+     top: 53px;
+     overflow: auto;
+     position: absolute;
+     width: 100%;
+ }
+ .content{
+    margin-top: 20px;
+ }
+ 

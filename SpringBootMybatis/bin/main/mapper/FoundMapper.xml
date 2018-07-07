@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.ctgu.springmvc.dao.IFoundDao">
+	<resultMap type="Found" id="FoundList">
+		<id column="pickID" property="foundId" />
+		<result column="userID" property="userId" />
+		<result column="pickName" property="foundName" />
+		<result column="pickType" property="foundType" />
+		<result column="pickDate" property="foundDate" />
+		<result column="pickPlace" property="foundPlace" />
+		<result column="pickPhone" property="foundPhone" />
+		<result column="reportDate" property="reportDate" />
+		<result column="storePlace" property="storePlace" />
+		<result column="pickInfo" property="foundInfo" />
+		<result column="pickCity" property="foundCity" />
+		<result column="state" property="state" />
+		<result column="image" property="image" />
+	</resultMap>
+  
+    <insert id="insert" parameterType="Found" useGeneratedKeys="true" keyProperty="pickID">  
+        insert into found(userID,pickName,pickType,pickDate,pickPlace,pickPhone,reportDate,storePlace, pickInfo,pickCity,state,image)  
+        VALUES(#{userId},#{foundName},#{foundType},#{foundDate},#{foundPlace},#{foundPhone},#{reportDate},#{storePlace},#{foundInfo},#{foundCity},#{state},#{image})  
+    </insert>  
+  
+    <delete id="delete" parameterType="Integer">  
+        delete from found where pickID=#{foundId}
+    </delete>  
+      
+      <!-- 记录时间reportDate不能修改 -->
+    <update id="update" parameterType="Found">  
+        update found set   
+            pickName=#{foundName}, pickType=#{foundType}, pickDate=#{foundDate}, pickPlace=#{foundPlace}, pickPhone=#{foundPhone}, storePlace=#{storePlace}, pickInfo=#{foundInfo}, pickCity=#{foundCity}, state=#{state}
+        where pickID=#{foundId}
+    </update> 
+    
+    <select id="findAll" resultMap="FoundList" parameterType="Integer" >
+    	select * from found 
+    </select>
+    
+    <select id="findByKey" resultMap="FoundList" parameterType="Integer">
+    	select * from found where pickID = #{foundId}
+    </select>
+    
+    <select id="findFoundListByUserId" resultMap="FoundList" parameterType="Integer">
+    	select * from found where userID = #{userID}
+    </select>
+    
+    <select id="findFoundsByName" resultMap="FoundList" parameterType="String">
+    	select * from found where pickInfo like #{name}
+    </select>
+    
+</mapper>  

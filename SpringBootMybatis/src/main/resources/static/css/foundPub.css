@@ -1,0 +1,16 @@
+.pubInfo{
+	margin:0 auto;
+	width: 800px;
+	border: 1px solid #eee;
+}
+
+.formHead{
+	background-color: #528870;
+    color: white;
+    padding-left: 20px;
+    font-size: 20px;
+    line-height: 35px;
+    font-family: "微软雅黑";
+    border: 1px solid #528870;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE-edge" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<link rel="Shortcut Icon" href="imgs/logo.png">
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.css"
+	rel="stylesheet">
+
+
+
+<link href="css/common.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/pub.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<!-- 引入jQuery -->
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.min.js"></script>
+
+<script type="text/javascript">
+function tolost(id){
+	var url =  "toLostDetail" + "?id=" + id;
+	$(".listTitle").attr("href",url); 
+	//window.location.href = "toLostDetail" + "?id=" + id;
+}
+function up(currentpage){
+  var pageno=currentpage-1;
+  //alert(pageno);
+  if(pageno==0){
+      alert("当前已经是第一页!");
+      return false;
+  }
+  window.location.href="toLostList?currentpage="+pageno;
+}
+//下一页
+function down(currentpage,totalPage){
+	var pageno=currentpage-(-1);
+	//alert(pageno);
+  if(currentpage==totalPage){
+      alert("当前已经是最后一页!");
+      return false;
+  }
+  window.location.href="toLostList?currentpage="+pageno;
+}
+function last(totalPage){
+	
+	window.location.href="toLostList?currentpage="+totalPage;
+function first(){
+	var pageno=1;
+	window.location.href="toLostList?currentpage="+pageno;
+}
+}
+
+
+</script>
+<head>
+	<title>失物信息</title>
+</head>
+<body>
+	<div th:insert="nav-tem::nav"></div>
+	<div class="listInfo" th:fragment="list">
+	<div class="formHead">
+		<p>失物信息</p>
+	</div>
+	
+	<div th:if="${losts==null}">
+		null
+	</div>
+	
+	<div class="list">
+		<ul id="listul" th:each="lost:${losts}">
+			<div class="listContent">
+				<li>
+					<span class="listDate" th:text="${#dates.format(lost.reportDate, 'yyyy-MM-dd HH:mm:SS')}"></span>
+					<div class="listImg" >
+						<!-- 点击进入详情 -->
+						<a th:onclick="'javascript: tolost('+${lost.lostId}+')' ">
+							<img th:src="@{'..'+${lost.image}}" alt="">
+						</a>
+					</div>
+					<a class="listTitle"  th:onclick="'javascript: tolost('+${lost.lostId}+')'" target="_blank">
+						<span  th:text="${lost.lostName}">dsawewqd</span>
+					</a>
+				</li>
+				<div class="listMore">
+				 	<!-- th:text="${lost.user.username" -->
+					 <span class="listUser">发布者：<span >&nbsp&nbsp</span></span>
+					<span class="listCity">&nbsp&nbsp丢失城市：<span th:text="${lost.lostCity}"></span></span>
+					<p class="listlostDate">丢失时间：</span><span c th:text="${#dates.format(lost.lostDate, 'yyyy-MM-dd')}"></p>
+				</div>
+			</div>
+		</ul>
+	</div>
+	<div>
+			<ul id="pagination">
+        	<a href="toLostList?currentpage=1">首页</a>
+        	<a th:onclick="'javascript: up('+${page.currentPage}+')' ">上一页</a>
+        	<a th:onclick="'javascript: down(\''+${page.currentPage}+'\',\''+${page.totalPage}+'\')' " >下一页</a>
+        	<a th:onclick="'javascript: last('+${page.totalPage}+')' " >最后一页</a>
+        	
+    	</ul>
+	</div>
+</div>
+</body>
+</html>

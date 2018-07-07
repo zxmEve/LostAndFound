@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.ctgu.springmvc.dao.ILostDao">
+	<resultMap type="Lost" id="LostList">
+		<id column="lostId" property="lostId" />
+		<result column="userId" property="userId" />
+		<result column="lostName" property="lostName" />
+		<result column="lostType" property="lostType" />
+		<result column="lostDate" property="lostDate" />
+		<result column="lostPlace" property="lostPlace" />
+		<result column="lostPhone" property="lostPhone" />
+		<result column="reportDate" property="reportDate" />
+		<result column="lostInfo" property="lostInfo" />
+		<result column="lostCity" property="lostCity" />
+		<result column="state" property="state" />
+		<result column="image" property="image" />
+	</resultMap>
+  
+    <insert id="insert" parameterType="Lost" useGeneratedKeys="true" keyProperty="lostId">  
+        insert into lost(userId,lostName,lostType,lostDate,lostPlace,lostPhone,reportDate,lostInfo,lostCity,state,image)  
+        VALUES(#{userId},#{lostName},#{lostType},#{lostDate},#{lostPlace},#{lostPhone},#{reportDate},#{lostInfo},#{lostCity},#{state},#{image})  
+    </insert>  
+  
+    <delete id="delete" parameterType="Integer">  
+        delete from lost where lostId=#{lostId}
+    </delete>  
+      
+    <update id="update" parameterType="Lost">  
+        update lost set   
+            lostName=#{lostName},lostType=#{lostType},lostDate=#{lostDate},lostPlace=#{lostPlace},lostPhone=#{lostPhone},lostInfo=#{lostInfo},lostCity=#{lostCity},state=#{state}
+        where lostId=#{lostId}
+    </update> 
+    
+    <select id="findByKey" resultType="Lost" parameterType="Integer">
+    	select * from lost where lostId = #{lostId}
+    </select>
+    
+    <select id="findAll" resultMap="LostList">
+    	select * from lost
+    </select>
+    
+    <select id="findLostListByUserId" resultType="Lost" parameterType="Integer">
+    	select * from lost where userID = #{userID}
+    </select>
+    
+    <select id="findLostsByName" resultType="Lost" parameterType="String">
+    	select * from lost where lostInfo like #{name}
+    </select>
+    <!-- CONCAT('%','${bookName}','%' ) -->
+    
+</mapper>  

@@ -1,0 +1,133 @@
+<!-- 失物详情页面 -->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE-edge" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<link rel="Shortcut Icon" href="imgs/logo.png">
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.css"
+	rel="stylesheet">
+<link href="css/common.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/pub.css">
+
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- 引入jquery -->
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.min.js"></script>
+<script>
+	function tolostupdate(id) {
+		window.location.href = "tolostUpdate" + "?id=" + id;
+	}
+</script>
+<head>
+	<title th:text = "${lost.lostName}"></title>
+</head>
+<body>
+	<div th:insert = "nav-tem::nav"></div>
+	<div class="formInfo">
+		<div class="formHead">
+			<p>失物详情<p>
+		</div>
+		<form action="" class="form-horizontal" id="">
+			<div class="form-group">
+				<!-- 显示图片并规定尺寸  -->
+				<label class="col-sm-3 control-label">失物图片</label>
+				<div class="col-sm-4">
+					<!-- 引号内可改路径前缀 -->
+					<img th:src="@{'show'+${lost.image}}" height="200px" width = "150px"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">失物名称</label>
+				<div class="col-sm-6">
+					<p th:text = "${lost.lostName}"></p>
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">失物状态</label>
+				<div class="col-sm-6">
+					<p th:if = "${lost.state==0}">进行中</p>
+					<p th:if = "${lost.state==1}">已完成</p>
+				</div>	
+			</div>
+			<div class="form-group">
+				<!-- select -->
+				<label class="col-sm-3 control-label">失物类型</label>
+				<div class="col-sm-4">
+					<p th:text = "${lost.lostType}" ></p>
+					
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">丢失时间</label>
+				<div class="col-sm-6 " >
+					<p th:text="${#dates.format(lost.lostDate,'yyyy-MM-dd')}"></p>
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">丢失城市</label>
+				<div class="col-sm-6">
+					<p th:text = "${lost.lostCity}"></p>
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">丢失地点</label>
+				<div class="col-sm-6">
+					<p th:text = "${lost.lostPlace}"></p>
+				</div>	
+			</div>
+			<!--  <div class="form-group">
+				<label class="col-sm-3 control-label">发布者</label>
+				<div class="col-sm-6">
+					<p th:text = "${lost.user.username}"></p>
+				</div>	
+			</div>-->
+			<div class="form-group">
+				<label class="col-sm-3 control-label">联系方式</label>
+				<div class="col-sm-6">
+					<p th:text = "${lost.lostPhone}"></p>
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">失物具体描述</label>
+				<div class="col-sm-6">
+					<p th:text = "${lost.lostInfo}"></p>
+				</div>	
+			</div>
+			
+			
+			<div class="form-group">
+				<div class="col-sm-offset-5" >
+					<!-- 点击之后跳转到修改页面 -->
+					<a th:onclick="'javascript: tolostupdate('+${lost.lostId}+')' ">
+					<button type="button"  th:if="${session.loginUser!=null && session.loginUser.userID==lost.userId}" class="btn btn-info">修改</button></a>
+					<a href="index"><button type="button" class="btn btn-default">返回</button></a>
+				</div>	
+			</div>
+			<input type="text" name="reportDate"  id="reportDate" hidden>
+
+			<!-- 1 -->
+			<input type="text" name="userId"  id="userId" value=" <%=Session['loginUser.userID'] %>" hidden>
+		</form>
+		</form>
+	</div>	
+</body>
+</html>

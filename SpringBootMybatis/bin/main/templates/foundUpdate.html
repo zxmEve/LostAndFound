@@ -1,0 +1,250 @@
+<!-- 招领信息修改 -->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE-edge" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<link rel="Shortcut Icon" href="imgs/logo.png">
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.css"
+	rel="stylesheet">
+
+
+
+<link href="css/common.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/pub.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<!-- 引入jQuery -->
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.min.js"></script>
+	 <!--validate验证表单插件-->
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-validate/1.17.0/additional-methods.js"></script>
+	<!-- 引入timepicker -->
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+<link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
+</head>
+
+<head>
+	<title>发布招领信息</title>
+</head>
+<script>
+	//表单字段验证 
+	$(function(){
+      	$("#foundForm").validate({
+      		onfocusout:function(element) { $(element).valid(); },
+            //onblur: function(element) { $(element).valid(); },    //鼠标移开验证
+            onsubmit:true,      //提交时验证（有效）
+            onkeyup:false,
+
+
+            rules:{
+            	foundName:{
+            		required:true,
+            		rangelength:[2,40]
+            	},
+            	foundType:{
+            		required:true,
+            	},
+            	foundDate:{
+            		required:true,
+            	},
+            	foundCity:{
+            		required:true,
+            		maxlength:30
+            	},
+            	foundPhone:{
+            		required:true,
+            		digits:true,
+            		rangelength:[11,11]
+            	},
+            	foundPlace:{
+            		required:true,
+            		maxlength:30
+            	},
+            	foundInfo:{
+            		required:true,
+            		maxlength:100
+            	},
+            	image:{
+            		required:true,
+            		extension:'jpe?g|png'
+            	}
+
+            },
+            messages:{
+            	foundPhone:{
+            		rangelength:"请输入正确的手机号"
+            	},
+            	image:{
+            		extension:"请上传正确的图片格式（*.jpg,*.jpeg,*.png）"
+            	}
+            }
+            
+      	})
+      });
+
+
+ 
+    //格式化时间 （yyyy-MM-dd HH:mm:SS）
+	function getFormatDate(){    
+	    var nowDate = new Date();     
+	    var year = nowDate.getFullYear();    
+	    var month = nowDate.getMonth() + 1 < 10 ? "0" + (nowDate.getMonth() + 1) : nowDate.getMonth() + 1;    
+	    var date = nowDate.getDate() < 10 ? "0" + nowDate.getDate() : nowDate.getDate();    
+	    var hour = nowDate.getHours()< 10 ? "0" + nowDate.getHours() : nowDate.getHours();    
+	    var minute = nowDate.getMinutes()< 10 ? "0" + nowDate.getMinutes() : nowDate.getMinutes();    
+	    var second = nowDate.getSeconds()< 10 ? "0" + nowDate.getSeconds() : nowDate.getSeconds();    
+	    return year + "-" + month + "-" + date+" "+hour+":"+minute+":"+second;    
+	}  
+
+	//获取提交时间并赋值给reportDate
+    function getDate () {
+    	var time = getFormatDate(); 
+    	$('#reportDate').val(time);
+    	// 2
+    	// $('#userId').val(${sessionScope.loginUser.userID});
+    	
+    	// 3
+    	//$('#userId').val($.session.get('loginUser.userID'));
+    	//var foundForm = $('#foundForm').serialize();
+    	
+    	$('#foundForm').submit();
+      }
+
+
+
+</script>
+<body>
+	<div th:insert="nav-tem::nav"></div>
+	<div id="pubInfo" class="formInfo">
+		<div class="formHead">
+			<p>修改招领信息<p>
+		</div>
+		<form class="form-horizontal" action="updateFound" method="post" name="foundForm" id="foundForm">
+			<input type="text" id="foundId" name="foundId" th:value = "${found.foundId}" hidden>
+			<div class="form-group">
+				<!-- 显示图片并规定尺寸  -->
+				<label class="col-sm-3 control-label">招领图片</label>
+				<div class="col-sm-4">
+					<!-- 引号内可改路径前缀 -->
+					<img th:src="@{'show'+${found.image}}" height="200px" width = "150px"></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">招领信息标题</label>
+				<div class="col-sm-6">
+					<input type="text" id="foundName" name="foundName" class="form-control" placeholder="请输入招领信息标题，40字以内" th:value="${found.foundName}">
+				</div>	
+			</div>
+			<div class="form-group">
+				<!-- select -->
+				<label class="col-sm-3 control-label">招领类型</label>
+				<div class="col-sm-4">				
+					<select class="form-control" id="foundType" name="foundType">
+						请选择类型				
+						<option th:selected="${found.foundType == '钱包'}">钱包</option>
+						<option th:selected="${found.foundType == '证件'}">证件</option> 
+						<option th:selected="${found.foundType == '卡类'}">卡类</option>
+						<option th:selected="${found.foundType == '钥匙'}">钥匙</option>
+						<option th:selected="${found.foundType == '服饰'}">服饰</option>
+						<option th:selected="${found.foundType == '数码'}">数码</option>
+						<option th:selected="${found.foundType == '宠物'}">宠物</option>
+						<option th:selected="${found.foundType == '包裹'}">包裹</option>
+						<option th:selected="${found.foundType == '其他'}">其他</option>
+						     
+					</select>
+
+					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">拾取时间</label>
+				<div class="col-sm-6 " >
+					<div class="input-group">
+					<input type="text" th:value="${#dates.format(found.foundDate,'yyyy-MM-dd')}" class="form-control" id="datePicker" name="foundDate">
+					<span class="input-group-addon">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</span>
+				</div>
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">拾取城市</label>
+				<div class="col-sm-6">
+					<input type="text" id="foundCity" name="foundCity" class="form-control" placeholder="请输入拾取城市"  th:value="${found.foundCity}">
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">拾取地点</label>
+				<div class="col-sm-6">
+					<input type="text" id="foundPlace" name="foundPlace" class="form-control" placeholder="请输入拾取地点，30字以内"  th:value="${found.foundPlace}">
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">存储地点</label>
+				<div class="col-sm-6">
+					<input type="text" id="storePlace" name="storePlace" class="form-control" placeholder="请输入存储地点，30字以内"  th:value="${found.storePlace}">
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">联系方式</label>
+				<div class="col-sm-6">
+					<input type="text" id="foundPhone" name="foundPhone" class="form-control" placeholder="联系方式"  th:value="${found.foundPhone}">
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">招领状态</label>
+				<div class="col-sm-6">
+					
+					<input type="radio" id="state-ok" name="state" value="1" th:checked="${found.state==1}">已完成
+					<input type="radio" id="state-no" name="state" value="0" th:checked="${found.state==0}">进行中
+				</div>	
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">招领具体描述</label>
+				<div class="col-sm-6">
+					<textarea  id="foundInfo" name="foundInfo" class="form-control" rows="3" placeholder="请输入招领具体描述，100字以内"  >[[${found.foundInfo}]]</textarea>
+				</div>	
+			</div>
+			
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2" >
+					<button type="button" onclick="getDate()" class="btn btn-info">提交</button>
+				</div>	
+			</div>
+			<input type="text" name="reportDate"  id="reportDate" hidden>
+			
+		</form>
+	</div>
+	<script>
+	$('#datePicker').datetimepicker({  
+        format: 'YYYY-MM-DD',  
+        locale: moment.locale('zh-cn')        
+    }); 
+</script>
+
+</body>
+</html>

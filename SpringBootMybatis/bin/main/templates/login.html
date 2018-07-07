@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE-edge" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<link rel="Shortcut Icon" href="imgs/logo.png">
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.css"
+	rel="stylesheet">
+<link href="css/common.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.min.js"></script>
+<head>
+
+<title>登录</title>
+</head>
+
+<body>
+	<nav class="navbar navLf navbar-fixed-top">
+		<div class="navContainer">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#top-navbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="index" class="navbar-brand"><img src="imgs/logo.png"
+					style="width: 25px; height: 25px; display: inline-block;"><span>
+					失物招领</span></a>
+			</div>
+			<div class="collapse navbar-collapse" id="top-navbar">
+
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<form action="/getAllUsers" method="get"
+							class="navbar-form navbar-left form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control"
+									placeholder="输入要检索的关键词..." />
+							</div>
+							<button class="btn btn-success" type="submit">搜索</button>
+						</form>
+					</li>
+					<li th:if="${user==null}">
+						<ul class="nav navbar-nav primary">
+							<li><a href="toRegist">注册</a></li>
+							<li><a data-toggle="modal" data-target="#myModal"
+								>登录</a></li>
+						</ul>
+					</li>
+					<li class="dropdown" th:if="${session.loginUser!=null}"><a href="#"
+						class="dropdown-menu-right" data-toggle="dropdown" th:text="${session.loginUser.username}"><span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="toPerson">账户信息</a></li>
+							<li><a href="logout">退出</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="loginContainer">
+
+		<div class="wrapLogin">
+			<div class="login" id="login" style="height: 312px;">
+		<div class="tips" id="tips">
+			登录
+		</div>
+		<div class="login_form">
+			<form id="loginForm" action="login" name="loginForm">
+				<div class="userArea" id="userArea">
+					<div class="inputOuter">
+						<input type="text" name="username" class="inputstyle" placeholder="用户名"tabindex="1">
+					</div>
+				</div>
+				<div class="pwdArea" id="pwdArea">
+					<div class="inputOuter">
+						<input type="password" name="password" class="inputstyle" placeholder="密码" tabindex="1">
+					</div>
+				</div>
+				<div class="submit">
+					<a class="loginButton" href="" hidefocus="true">
+						<input type="submit" tabindex="6" value="登 录" class="btn" id="loginButton">
+					</a>
+				</div>
+			</form>
+			
+		</div>
+		<div class="bottom">
+				<a href="toRegist" target="_blank">注册新帐号</a>
+			</div>
+		</div>
+		</div>
+		<div class="backgroundImg">
+			<img class="backgroundImg" src="imgs/login_back.jpeg">
+		</div>
+
+	</div>
+	
+	
+</body>
+</html>

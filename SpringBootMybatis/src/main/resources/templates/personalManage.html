@@ -1,0 +1,389 @@
+<!-- 个人中心页面 -->
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE-edge" />
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<link rel="Shortcut Icon" href="imgs/logo.png">
+<link
+	href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.css"
+	rel="stylesheet">
+
+
+
+<link href="css/common.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/manage.css">
+<link rel="stylesheet" type="text/css" href="css/pub.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<!-- 引入jQuery -->
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/ResponsiveSlides.js/1.54/responsiveslides.min.js"></script>
+	 <!--validate验证表单插件-->
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-validate/1.17.0/additional-methods.js"></script>
+    <script type="text/javascript">
+    function tolost(id){
+		  window.location.href = "toLostDetail" + "?id=" + id;
+	}
+    function toFound(id){
+		  window.location.href = "toFoundDetail" + "?id=" + id;
+	/*function up(currentpage){
+			  var pageno=currentpage-1;
+			  //alert(pageno);
+			  if(pageno==0){
+			      alert("当前已经是第一页!");
+			      return false;
+			  }
+			  window.location.href="toPerson?currentpage="+pageno;
+			}
+			//下一页
+			function down(currentpage,totalPage){
+			  var pageno=currentpage+1;
+			 // alert(pageno);
+			  if(currentpage==totalPage){
+			      alert("当前已经是最后一页!");
+			      return false;
+			  }
+			  window.location.href="toPerson?currentpage="+pageno;
+			}
+			  function last(totalPage){
+				
+				window.location.href="toPerson?currentpage="+totalPage;
+	function first(currentpage){
+			window.location.href="toPerson?currentpage=1";
+	}*/
+    
+    }
+    </script>
+<head>
+	<title>个人主页</title>
+</head>
+<script>
+	$(document).ready(function() {
+		// 切换页面
+		var temp = "none";
+		$("#lost").click(function(){
+			/*var id = $('#userID').val();
+			$.ajax({
+				// 根据id查询lostList
+				url:"findLostListByUserId",
+				data:{"userID":id},
+				type:"POST",
+				success:function() {
+						alert("1");
+						
+						
+				}
+			});*/
+			openPage(1);
+		});
+		
+		$("#found").click(function(){
+			/*var id = $('#userID').val();
+			$.ajax({
+				// 根据id查询foundList
+				url:"findFoundListByUserId",
+				data:{"userId":userId},
+				dataType:"json",
+				success:function(){
+					alert("2");
+					
+				}
+			});*/
+			openPage(2);
+		});
+		
+		$("#pinfo").click(function(){
+			openPage(3);
+			
+		});
+		
+		$('#update').click(function(){
+			openPage(4);
+		});
+		$('#infoSub').click(function(){
+			var formdata = $('#infoForm').serializeArray();
+			$.ajax({
+				// 提交修改Mapping
+				url:"updateUser",
+				data:formdata,
+				type:"POST",
+				dataType:"json",
+				async: false,
+				// 返回值为true说明修改成功，后台函数需要修改Session中存放的user对象
+				success:function(data) {
+					if(data){
+						//openPage(3);
+						alert("修改成功");
+					}else{
+						alert("修改失败");
+					}
+				}
+			});
+			
+		});
+		function openPage(obj){
+			for(var i = 1; i <= 4; i++){
+				if(i == obj){
+					temp = "block";
+				}else{
+					temp="none";
+				}
+				document.getElementById("page" + i).style.display = temp;
+			}
+		}
+		// 切换active状态
+		$(".nav li").click(function() {
+    		$(".active").removeClass('active');
+    		$(this).addClass("active");
+		});
+	});
+	
+	$(function(){
+		$("#infoForm").validate({
+      		onfocusout:function(element) { $(element).valid(); },
+            //onblur: function(element) { $(element).valid(); },    //鼠标移开验证
+            onsubmit:true,      //提交时验证（有效）
+            onkeyup:false,
+
+            rules:{
+            	phone:{
+            		required:true,
+            		digits:true,
+            		rangelength:[11,11]
+            	},
+            	password:{
+            		required:true,
+            		rangelength:[6,18]
+            	},
+            	email:{
+            		required:true,
+            		email:true
+            	}
+            },
+            messages:{
+            	phone:{
+            		rangelength:"请输入正确的手机号"
+            	},
+            	password:{
+            		rangelength:"密码需要在6-18位"
+            	}
+            }
+
+        });
+
+	});
+</script>
+<body>
+	<div th:insert="nav-tem::nav"></div>
+	<!-- 主体内容 -->
+	<div class="pageContainer">
+		<!-- 左侧导航栏 -->
+		<div class="pageSidebar">
+			<ul class="nav nav-stacked nav-pills">
+				<li id="lost" role="presentation" class="active">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>失物信息
+				</li>
+				<li id="found" role="presentation">
+					<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>招领信息
+				</li>
+				<li id="pinfo" role="presentation">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>个人信息
+				</li>
+			</ul>
+		</div>
+		<!-- 左侧导航和正文内容分割线 -->
+		<div class="split"></div>
+		<!-- 正文内容部分 -->
+		<div class="pageContent">
+			<!-- 失物列表 -->
+			<div id="page1" class="content">
+				<div class="listInfo">
+					<div class="formHead">
+						<p>失物信息</p>
+					</div>
+
+					<div th:if="${losts==null}">null</div>
+
+					<div class="list">
+						<ul id="listul" th:each="lost:${losts}">
+							<div class="listContent">
+								<li><span class="listDate"
+									th:text="${#dates.format(lost.reportDate, 'yyyy-MM-dd HH:mm:SS')}"></span>
+									<div class="listImg">
+										<!-- 点击进入详情 -->
+										<a th:onclick="'javascript: tolost('+${lost.lostId}+')' ">
+											<img th:src="@{'..'+${lost.image}}" alt="">
+										</a>
+									</div> <a class="listTitle"
+									th:onclick="'javascript: tolost('+${lost.lostId}+')' "
+									target="_blank"> <span th:text="${lost.lostName}">dsawewqd</span>
+								</a></li>
+								<div class="listMore">
+									<!-- th:text="${lost.user.username" -->
+									<span class="listUser">发布者：<span>&nbsp&nbsp</span></span> <span
+										class="listCity">&nbsp&nbsp丢失城市：<span
+										th:text="${lost.lostCity}"></span></span>
+									<p class="listlostDate">
+										丢失时间：</span><span c
+											th:text="${#dates.format(lost.lostDate, 'yyyy-MM-dd')}">
+									</p>
+								</div>
+							</div>
+						</ul>
+					</div>
+					
+				</div>
+				<!--  <div>
+					<ul id="pagination">
+        				<a th:onclick="'javascript: first('+${page1.currentPage}+')' ">首页</a>
+        				<a th:onclick="'javascript: up('+${page1.currentPage}+')' ">上一页</a>
+        				<a th:onclick="'javascript: down(\''+${page1.currentPage}+'\',\''+${page1.totalPage}+'\')' " >下一页</a>
+        				<a th:onclick="'javascript: last('+${page1.totalPage}+')' " >最后一页</a>       		
+    				</ul>
+					</div>-->
+			</div>
+
+			<!-- 招领列表 -->
+			<div id="page2" class="content" style="display:none">
+				<div class="listInfo" th:fragment="list">
+	<div class="formHead">
+		<p>招物信息</p>
+	</div>
+	
+	<div th:if="${founds==null}">
+		null
+	</div>
+	
+	<div class="list">
+		<ul id="listul" th:each="found:${founds}">
+			<div class="listContent">
+				<li>
+					<span class="listDate" th:text="${#dates.format(found.reportDate, 'yyyy-MM-dd HH:mm:SS')}"></span>
+					<div class="listImg" >
+						<!-- 点击进入详情 -->
+						<a th:onclick="'javascript: toFound('+${found.foundId}+')' ">
+							<img th:src="@{'..'+${found.image}}" alt="">
+						</a>
+					</div>
+					<a class="listTitle" th:onclick="'javascript: toFound('+${found.foundId}+')' " target="_blank">
+						<span  th:text="${found.foundName}">dsawewqd</span>
+					</a>
+				</li>
+				<div class="listMore">
+					<span class="listUser">发布者：<span >&nbsp&nbsp</span></span>
+					<span class="listCity">&nbsp&nbsp拾取城市：<span th:text="${found.foundCity}"></span></span>
+					<p class="listfoundDate">拾取时间：</span><span c th:text="${#dates.format(found.foundDate, 'yyyy-MM-dd')}"></p>
+				</div>
+			</div>
+		</ul>
+	</div>
+	
+</div>
+<!--  <div>
+					<ul id="pagination">
+        				<a th:onclick="'javascript: first('+${page2.currentPage}+')' ">首页</a>
+        				<a th:onclick="'javascript: up('+${page2.currentPage}+')' ">上一页</a>
+        				<a th:onclick="'javascript: down(\''+${page2.currentPage}+'\',\''+${page2.totalPage}+'\')' " >下一页</a>
+        				<a th:onclick="'javascript: last('+${page2.totalPage}+')' " >最后一页</a>       		
+    				</ul>
+					</div>-->
+</div>
+			<!-- 个人信息 -->
+			<div id="page3"  class="content" style="display:none">
+				<div class="listInfo">
+				<div class="formHead">
+					<p>个人信息<p>
+				</div>
+				<form action="" class="form-horizontal" id="updateInfo">
+					<div class="form-group">
+						<label class="col-sm-3 control-label">用户名</label>
+						<div class="col-sm-6">
+							<p th:text = "${session.loginUser.username}"></p>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">电话号码</label>
+						<div class="col-sm-6">
+							<p th:text = "${session.loginUser.phone}"></p>
+						</div>	
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Email</label>
+						<div class="col-sm-4">
+							<p th:text = "${session.loginUser.email}"></p>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-5" >
+							<!-- 点击之后跳转到修改页面 -->
+							<button type="button" class="btn btn-info" id="update">修改</button>
+						</div>	
+					</div>
+				</form>
+				</div>	
+			</div>
+			<!-- 修改个人信息 -->
+			<div id="page4" class="content"   style="display:none">
+			<div id="pubInfo" class="listInfo">
+			<div class="formHead">
+				<p>修改个人信息<p>
+			</div>
+			<form class="form-horizontal" action="updateUser" name="infoForm" id="infoForm">
+				<input type="text" id="userID" name="userID" th:value="${session.loginUser.userID}"  hidden>
+			
+				<div class="form-group">
+					<label class="col-sm-3 control-label">用户名</label>
+					<div class="col-sm-6">
+					<input type="text" id="username" name="username" class="form-control" readonly th:value="${session.loginUser.username}">
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">密码</label>
+					<div class="col-sm-6">
+				 		<input type="text" id="password" name="password" class="form-control" th:value="${session.loginUser.password}" placeholder="请输入6-18位密码">
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">电话号码</label>
+					<div class="col-sm-6">
+					 	<input type="text" id="phone" name="phone" class="form-control" th:value="${session.loginUser.phone}" placeholder="请输入11位手机号" >
+					</div>	
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">邮箱</label>
+					<div class="col-sm-6">
+						<input type="email" id="email" name="email" class="form-control" th:value="${session.loginUser.email}" placeholder="请输入邮箱地址" >
+					</div>	
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-5" >
+						<button type="button" class="btn btn-info" id="infoSub">提交</button>
+					</div>	
+				</div>
+			</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.ctgu.springmvc4'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2')
+	compile('org.webjars:materializecss:0.96.0')
+	compile('org.webjars:jquery:2.1.4')
+	compile('org.webjars:bootstrap:4.1.0')
+	compile('commons-dbcp:commons-dbcp:1.4')
+	compile('com.alibaba:fastjson:1.2.5') 
+	compile('net.sf.json-lib:json-lib:2.4:jdk15')
+	compile('com.github.pagehelper:pagehelper-spring-boot-starter:1.2.3')
+	runtime('mysql:mysql-connector-java')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile("org.springframework.boot:spring-boot-devtools")
+	//导入FreeMarker模板视图依赖
+	compile('org.springframework.boot:spring-boot-starter-freemarker')
+}

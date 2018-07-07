@@ -1,0 +1,58 @@
+﻿body{
+	background-color: #F2EFE6;
+}
+a:hover{
+	text-decoration: none;
+}
+
+
+/*发布按钮样式*/
+.pubBtn{
+	width: 270px;
+    height: 70px;
+    background-color: #209E85;
+    color: white;
+    font-size: 35px;
+    margin: 30px 120px 30px 120px;
+    border-radius: 5px;
+    font-family: "微软雅黑";
+}
+/*信息栏样式*/
+.infoContainer{
+	background-color: white;
+	border: 1px solid #e5e5e5;
+}
+.infoContainer a{
+	color:#fff;
+}
+.listHead{
+	background-color: #528870;
+    color: white;
+    padding-left: 20px;
+    font-size: 20px;
+    line-height: 45px;
+    font-family: "微软雅黑";
+}
+.listHead a{
+	color:#fff;
+}
+.listHead span{
+	float: right;
+	padding-right: 10px;
+}
+.infoList li{
+	line-height: 29px;
+	overflow: hidden;
+	padding-left: 10px;
+}
+.infoList a{
+	color: #333;
+}
+.infoList a:hover{
+	color:  #528870;
+	
+}
+.infoDate{
+	float: right;
+	padding-right : 10px;
+}

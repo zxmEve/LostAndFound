@@ -1,0 +1,86 @@
+﻿@charset "UTF-8";
+ul,li{
+	list-style: none;
+}
+a:hover{
+	text-decoration: none;
+}
+body{
+	font-family: "微软雅黑";
+}
+/*导航栏样式*/
+.navLf{
+	background-color: #528870;
+	color: #fff;
+}
+.navLf a{
+	color: #fff;
+}
+.navContainer{
+	margin:0 auto;
+	
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+
+h1,h3,p,a,button{
+    font-family: "Microsoft Yahei", "微软雅黑",arial;
+}
+
+.pageone{
+    height: 950px;
+}
+.pageonebg{
+    height: 1280px;
+    width: 100%;
+    position: absolute;
+    background-position: center center;
+    background-size: cover;
+}
+#pageone_bg{
+    background-image: url("../imgs/bg1.jpg");
+}
+.headfont{
+    margin-top: 200px;
+    line-height: 60px;
+}
+.title-text{
+    margin-left:150px;
+}
+.headfont h1{
+    font-size:50pt;
+    color: #fff;
+}
+
+.headfont p{
+    color: #fff;
+    font-size:20pt;
+}
+
+.img_slide{
+    width: 100%;
+}
+.carousel-caption p{
+    font-size:20pt;
+    margin-bottom:30px;
+}
+.navbar-header a{
+     font-family: "华文新魏";
+     font-size: 18pt;
+ }
+.navbar-header a:hover{
+    text-decoration-color: #985f0d;
+}
+
+.rslides img{
+	padding-top:50px;
+	
+}
+
+/*版权信息*/
+.footer{
+	width: 100%;
+	height: 200px;
+	background-color: #528870;
+}

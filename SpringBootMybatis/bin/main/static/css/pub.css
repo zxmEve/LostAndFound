@@ -1,0 +1,67 @@
+/*表单css*/
+.formInfo{
+	margin:100px auto;
+	width: 800px;
+	border: 1px solid #eee;
+}
+
+.formHead{
+	background-color: #528870;
+    color: white;
+    padding-left: 20px;
+    font-size: 20px;
+    line-height: 40px;
+    font-family: "微软雅黑";
+    border: 1px solid #528870;
+    margin-bottom: 20px;
+}
+
+.formHead p{
+    margin: 5px 0;
+}
+
+/*列表css*/
+#listul{
+    padding: 0;
+    margin: 0;
+}
+.listInfo{
+    margin: 0 auto;
+    width: 1000px;
+    border: 1px solid #eee;
+}
+.listTitle{
+    font-size: 20px;
+    color: #222;
+}
+.listTitle:hover{
+    color: #70a19f;
+}
+.listContent{
+    border-bottom:1px solid #eee;
+    height: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.listDate{
+    color: #AAA;
+    font-size: 12px;
+    float: right;
+}
+
+.listImg{
+    float:left;
+    margin:5px 15px 0 5px;
+}
+.listImg img{
+    width: 90px;
+    height: 90px;
+}
+.listMore{
+    height: 50px;
+    line-height: 2em;
+    margin-top: 10px;
+    padding-bottom: 15px;
+    color: #777;
+    margin-left: 14px;
+}

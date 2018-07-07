@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.ctgu.springmvc.dao.IUserDao">
+	<resultMap type="User" id="UserList">
+		<id column="userID" property="userID" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="phone" property="phone" />
+		<result column="email" property="email" />		
+	</resultMap>
+  
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="userID">  
+        INSERT INTO user(username,password,phone,email)  
+        VALUES(#{username},#{password},#{phone},#{email})  
+    </insert>  
+  
+    <delete id="delete" parameterType="Integer">  
+        delete from user WHERE userID=#{userID}  
+    </delete>  
+      
+    <update id="update" parameterType="User">  
+        UPDATE user SET   
+            username=#{username}, password=#{password},phone=#{phone},email=#{email}  
+        WHERE userID=#{userID}  
+    </update>  
+    
+    <select id="findByKey" resultType="User" parameterType="Integer">
+    	select * from user where userID = #{userID}
+    </select>
+    <select id="findUserByName" resultType="User" parameterType="String">
+    	select * from user where username = #{username}
+    </select>
+    <select id="findByEmail" resultType="User" parameterType="String">
+    	select * from user where email=#{email} 
+    </select>
+    <select id="findAll" resultMap="UserList">
+    	select * from user
+    </select>
+</mapper>  

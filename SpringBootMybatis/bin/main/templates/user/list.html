@@ -1,0 +1,54 @@
+<!-- bootstrap Table网页：https://blog.csdn.net/javahighness/article/details/73929108 -->
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css" media="screen,projection">
+<!-- 引入bootstrap样式 -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<!-- 引入bootstrap-table样式 -->
+<link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.css" rel="stylesheet">
+
+<!-- jquery -->
+<script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- bootstrap-table.min.js -->
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+<!-- 引入中文语言包 -->
+<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<head>
+<meta charset="UTF-8">
+<title>用户列表</title>
+</head>
+<body>
+<div class="section no-pad-bot" th:fragment="content">
+	<div class="container">
+		<h3 class="header center orange-text">用户列表</h3>
+		<br/>
+		<table>
+			<thead>
+				<tr class="row center">
+					<th data-field="user_id">用户ID</th>
+					<th data-field="user_name">用户名</th>
+					<th data-field="real_name">真实姓名</th>
+					<th data-field="mobile">电话</th>
+					<th data-field="price">操作</th>
+				</tr>
+			</thead>
+			 <tbody>
+				<tr th:each="user:${users}" class="row">
+					<td style="padding:3px;font-size:16px"> <span th:text="${user.user_id}">default Id</span></td>
+					<td style="padding:3px;font-size:16px" th:text="${user.user_name}"></td>
+					<td style="padding:3px;font-size:16px" th:text="${user.real_name}"></td>
+					<td style="padding:3px;font-size:16px" th:text="${user.mobile}"></td>
+					<td style="padding:3px;font-size:16px"> <a href="/update?user_id=${user.user_id}" style="text-decoration: none;color: green">编辑</a>|<a style="text-decoration: none;color: red">删除</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+</body>
+</html>
